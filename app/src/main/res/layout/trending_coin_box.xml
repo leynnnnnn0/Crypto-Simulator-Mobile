@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@drawable/coin_box_background"
+    android:layout_marginBottom="10dp"
+    android:padding="10dp"
+    android:layout_height="100dp">
+
+    <ImageView
+        android:id="@+id/coinLogo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        app:srcCompat="@drawable/app_logo" />
+
+    <TextView
+        android:id="@+id/coinName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bitcoin"
+        style="@style/Heading20"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="70dp"
+        />
+    <TextView
+        android:id="@+id/coinSymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bitcoin"
+        style="@style/Subheading15"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="70dp"
+        />
+
+    <TextView
+        android:id="@+id/coinPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$2,314.43"
+        style="@style/Heading20"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        />
+</RelativeLayout>

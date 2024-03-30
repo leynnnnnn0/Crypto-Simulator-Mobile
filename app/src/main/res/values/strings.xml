@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Crypto Simulator Mobile</string>
+    <string name="crypto">Crypto 101</string>
+    <!--    Tab texts-->
+    <string name="home">Home</string>
+    <string name="portfolio">Portfolio</string>
+    <string name="rewards">Rewards</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

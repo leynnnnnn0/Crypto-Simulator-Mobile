@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Heading25">
+        <item name="android:textColor">@color/primary_font_color</item>
+        <item name="android:fontFamily">@font/livvic_semi_bold</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+    <style name="Heading20">
+        <item name="android:textColor">@color/primary_font_color</item>
+        <item name="android:fontFamily">@font/livvic_semi_bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="Subheading20">
+        <item name="android:textColor">@color/primary_font_color</item>
+        <item name="android:fontFamily">@font/livvic_regular</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="Subheading15">
+        <item name="android:textColor">@color/primary_font_color</item>
+        <item name="android:fontFamily">@font/livvic_regular</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+</resources>
