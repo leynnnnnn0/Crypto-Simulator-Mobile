@@ -2,6 +2,7 @@ package com.leynnnnnn.cryptosimulatormobile;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,14 +36,16 @@ public class Portfolio extends Fragment {
     AllCoinsAdapter adapter;
     List<AllCoins> coins;
     String query;
+    TextView errorMessage;
+    Button searchButton;
     public interface GetApiResponse {
+        // Get request to fetch the coins
         @GET("coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en")
         Call<List<AllCoins>> getAllCoins();
-
+        // Get request to fetch the data of the query
         @GET("search")
         Call<SearchCoinResponse> getCoinDetails(@Query("query") String query);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,42 +53,39 @@ public class Portfolio extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_portfolio, container, false);
         exploreSearchBar = rootView.findViewById(R.id.exloreSearchBar);
         recyclerView = rootView.findViewById(R.id.coinsRecyclerView);
-        TextView errorMessage = rootView.findViewById(R.id.fetchingDataErrorText);
-        Button searchButton = rootView.findViewById(R.id.searchButton);
-
+        errorMessage = rootView.findViewById(R.id.fetchingDataErrorText);
+        searchButton = rootView.findViewById(R.id.searchButton);
+        // Followed the documentation for this codes
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.coingecko.com/api/v3/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         GetApiResponse apiResponse = retrofit.create(GetApiResponse.class);
-
+        // Event listener for the search bar
         searchButton.setOnClickListener(v -> {
             query = exploreSearchBar.getText().toString();
-            Log.d("message", query);
             apiResponse.getCoinDetails(query).enqueue(new Callback<SearchCoinResponse>() {
                 @Override
-                public void onResponse(Call<SearchCoinResponse> call, Response<SearchCoinResponse> response) {
+                public void onResponse(@NonNull Call<SearchCoinResponse> call, @NonNull Response<SearchCoinResponse> response) {
                     if(response.isSuccessful()) {
+                        assert response.body() != null;
                         List<CoinsSearched> coins = response.body().getCoins();
                         SearchedCoinsAdapter adapter1 = new SearchedCoinsAdapter(requireContext(), coins);
                         recyclerView.setAdapter(adapter1);
                         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
                         errorMessage.setVisibility(View.INVISIBLE);
                     }
-
-
                 }
-
                 @Override
-                public void onFailure(Call<SearchCoinResponse> call, Throwable throwable) {
+                public void onFailure(@NonNull Call<SearchCoinResponse> call, @NonNull Throwable throwable) {
 
                 }
             });
         });
+        // Fetching the data for the list of coins
         apiResponse.getAllCoins().enqueue(new Callback<List<AllCoins>>() {
             @Override
-            public void onResponse(Call<List<AllCoins>> call, Response<List<AllCoins>> response) {
+            public void onResponse(@NonNull Call<List<AllCoins>> call, @NonNull Response<List<AllCoins>> response) {
                 if(response.isSuccessful()) {
                     coins = response.body();
                     Log.d("message", exploreSearchBar.getText().toString());
@@ -97,17 +97,12 @@ public class Portfolio extends Fragment {
                         errorMessage.setVisibility(View.INVISIBLE);
                     }
                 }
-
             }
-
             @Override
-            public void onFailure(Call<List<AllCoins>> call, Throwable throwable) {
+            public void onFailure(@NonNull Call<List<AllCoins>> call, @NonNull Throwable throwable) {
 
             }
         });
-
-
-
         return rootView;
     }
 }

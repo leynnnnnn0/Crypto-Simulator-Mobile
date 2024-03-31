@@ -2,6 +2,7 @@ package com.leynnnnnn.cryptosimulatormobile;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +14,6 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.LongFunction;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,13 +28,11 @@ public class Home extends Fragment {
         @GET("search/trending")
         Call<CoinApiResponse> getTrendingCoins();
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
         // Api request using retrofit
         // Documentation  https://square.github.io/retrofit/
         Retrofit retrofit = new Retrofit.Builder()
@@ -45,7 +43,7 @@ public class Home extends Fragment {
         ApiRequest request = retrofit.create(ApiRequest.class);
         request.getTrendingCoins().enqueue(new Callback<CoinApiResponse>() {
             @Override
-            public void onResponse(Call<CoinApiResponse> call, Response<CoinApiResponse> response) {
+            public void onResponse(@NonNull Call<CoinApiResponse> call, @NonNull Response<CoinApiResponse> response) {
                 // Telling the ide that I'm sure that the response is not empty
                 assert response.body() != null;
                 // Getting the response and storing in a list
@@ -67,7 +65,7 @@ public class Home extends Fragment {
                 recyclerView.setAdapter(adapter);
             }
             @Override
-            public void onFailure(Call<CoinApiResponse> call, Throwable throwable) {
+            public void onFailure(@NonNull Call<CoinApiResponse> call, @NonNull Throwable throwable) {
 
             }
         });
