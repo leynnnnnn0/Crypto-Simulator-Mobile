@@ -1,14 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background_color"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".Portfolio">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <TextView
+        android:id="@+id/fetchingDataErrorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Internal Server Error"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        style="@style/Heading25"
+        />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/portfolio" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/exloreSearchBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/search_icon"
+            android:ems="10"
+            android:inputType="text"
+            android:background="@drawable/search_bar"
+            android:text="Search Coin" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Coins"
+            style="@style/Heading25"
+            android:layout_marginTop="10dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/coinsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+</RelativeLayout>
